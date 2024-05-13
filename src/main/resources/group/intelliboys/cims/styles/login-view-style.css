@@ -9,3 +9,11 @@
 .lef-pane {
     -fx-background-color: #fff;
 }
+
+.f-password-lbl:hover {
+    -fx-text-fill: red;
+}
+
+.register-lbl:hover {
+    -fx-text-fill: red;
+}

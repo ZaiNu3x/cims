@@ -35,7 +35,8 @@ javafx {
 }
 
 dependencies {
-
+    implementation 'com.mysql:mysql-connector-j:8.3.0'
+    implementation 'org.springframework.security:spring-security-core:5.7.3'
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }

@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles/login-view-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@styles/login-view-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.intelliboys.cims.controllers.LoginController">
    <children>
       <Pane prefHeight="600.0" prefWidth="496.0" styleClass="lef-pane">
          <children>
@@ -25,20 +24,20 @@
                   <Image url="@images/user.png" />
                </image>
             </ImageView>
-            <TextField layoutX="121.0" layoutY="210.0" prefHeight="45.0" prefWidth="290.0" promptText="Username" />
+            <TextField fx:id="usernameField" layoutX="121.0" layoutY="210.0" prefHeight="45.0" prefWidth="290.0" promptText="Username" />
             <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="85.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/password.png" />
                </image>
             </ImageView>
-            <PasswordField layoutX="121.0" layoutY="279.0" prefHeight="45.0" prefWidth="290.0" promptText="Password" />
-            <Label layoutX="293.0" layoutY="335.0" text="Forgot Password?" underline="true">
+            <PasswordField fx:id="passwordField" layoutX="121.0" layoutY="279.0" prefHeight="45.0" prefWidth="290.0" promptText="Password" />
+            <Label layoutX="293.0" layoutY="335.0" styleClass="f-password-lbl" text="Forgot Password?" underline="true">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button layoutX="203.0" layoutY="412.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="90.0" text="LOGIN" />
-            <Label layoutX="212.0" layoutY="523.0" text="REGISTER">
+            <Button layoutX="203.0" layoutY="412.0" mnemonicParsing="false" onAction="#loginClicked" prefHeight="45.0" prefWidth="90.0" text="LOGIN" />
+            <Label layoutX="212.0" layoutY="523.0" styleClass="register-lbl" text="REGISTER" underline="true">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
