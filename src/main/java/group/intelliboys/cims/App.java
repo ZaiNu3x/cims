@@ -8,17 +8,22 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Stack;
 
 public class App extends Application {
+
+    public static Stage primaryStage;
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("login-view.fxml"));
-        stage.setTitle("Customer Information Management System");
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("images/favicon.png")).toString()));
+        primaryStage = stage;
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/login-view.fxml"));
+        primaryStage.setTitle("Customer Information Management System");
+        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("images/favicon.png")).toString()));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
