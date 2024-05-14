@@ -4,6 +4,7 @@ module group.intelliboys.cims {
     requires java.sql;
     requires spring.security.crypto;
     requires java.desktop;
+    requires javafx.swing;
 
     opens group.intelliboys.cims to javafx.fxml;
     exports group.intelliboys.cims;

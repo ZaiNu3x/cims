@@ -41,7 +41,10 @@ public class LoginController {
                     String fetchedHashedPassword = rs.getString("password");
 
                     if(BCrypt.checkpw(password, fetchedHashedPassword)) {
-                        System.out.println("Password matches!");
+                        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/dashboard-view.fxml"));
+                        Scene scene = new Scene(fxmlLoader.load());
+                        App.primaryStage.setScene(scene);
+                        App.primaryStage.centerOnScreen();
                     }
                     else System.out.println("Password not matches!");
                 }
@@ -49,8 +52,8 @@ public class LoginController {
 
                 conn.close();
             }
-            catch (SQLException e) {
-                e.printStackTrace();
+            catch (Exception e) {
+                throw new RuntimeException(e);
             }
         }
         else System.out.println("Invalid Input!");
@@ -69,5 +72,4 @@ public class LoginController {
         App.primaryStage.setScene(scene);
         App.primaryStage.centerOnScreen();
     }
-
 }
