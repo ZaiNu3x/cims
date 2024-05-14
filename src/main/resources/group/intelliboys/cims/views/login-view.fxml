@@ -31,7 +31,7 @@
                </image>
             </ImageView>
             <PasswordField fx:id="passwordField" layoutX="121.0" layoutY="279.0" prefHeight="45.0" prefWidth="290.0" promptText="Password" />
-            <Label layoutX="293.0" layoutY="335.0" styleClass="f-password-lbl" text="Forgot Password?" underline="true">
+            <Label layoutX="293.0" layoutY="335.0" onMouseClicked="#forgotPasswordClicked" styleClass="f-password-lbl" text="Forgot Password?" underline="true">
                <font>
                   <Font size="15.0" />
                </font>

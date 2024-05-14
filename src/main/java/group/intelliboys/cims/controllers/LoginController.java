@@ -56,10 +56,18 @@ public class LoginController {
         else System.out.println("Invalid Input!");
     }
 
+    public void forgotPasswordClicked() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/forgot-password-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        App.primaryStage.setScene(scene);
+        App.primaryStage.centerOnScreen();
+    }
+
     public void registerClicked() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/registration-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         App.primaryStage.setScene(scene);
         App.primaryStage.centerOnScreen();
     }
+
 }
