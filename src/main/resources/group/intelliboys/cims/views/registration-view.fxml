@@ -51,5 +51,6 @@
          </graphic>
       </Button>
       <Label fx:id="ageField" alignment="CENTER" layoutX="413.0" layoutY="258.0" prefHeight="50.0" prefWidth="200.0" style="-fx-border-width: 1; -fx-border-color: gray;" text="Age" />
+      <TextField fx:id="emailField" layoutX="414.0" layoutY="420.0" prefHeight="50.0" prefWidth="351.0" promptText="email" />
    </children>
 </AnchorPane>

@@ -3,6 +3,7 @@ package group.intelliboys.cims.controllers;
 import group.intelliboys.cims.App;
 import group.intelliboys.cims.Util.Validator;
 import group.intelliboys.cims.configs.Database;
+import group.intelliboys.cims.models.User;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class LoginController {
@@ -41,6 +43,28 @@ public class LoginController {
                     String fetchedHashedPassword = rs.getString("password");
 
                     if(BCrypt.checkpw(password, fetchedHashedPassword)) {
+
+                        String query = "SELECT * FROM users WHERE username = '"+username+"';";
+                        rs = stmt.executeQuery(query);
+
+                        if(rs.next()) {
+                            App.currentLoggedInUser = new User();
+
+                            App.currentLoggedInUser.setUsername(rs.getString("username"));
+                            App.currentLoggedInUser.setPassword(rs.getString("password"));
+                            App.currentLoggedInUser.setLastName(rs.getString("last_name"));
+                            App.currentLoggedInUser.setFirstName(rs.getString("first_name"));
+                            App.currentLoggedInUser.setMiddleName(rs.getString("middle_name"));
+                            App.currentLoggedInUser.setSex(rs.getString("sex"));
+                            App.currentLoggedInUser.setBirthDate(rs.getDate("birth_date").toLocalDate());
+                            App.currentLoggedInUser.setAge(rs.getByte("age"));
+                            App.currentLoggedInUser.setAddress(rs.getString("address"));
+                            App.currentLoggedInUser.setEmail(rs.getString("email"));
+                            App.currentLoggedInUser.setProfilePic(rs.getBytes("profile_pic"));
+                        }
+
+                        System.out.println(App.currentLoggedInUser.getUsername());
+
                         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/dashboard-view.fxml"));
                         Scene scene = new Scene(fxmlLoader.load());
                         App.primaryStage.setScene(scene);

@@ -9,12 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -26,7 +25,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.Period;
@@ -63,6 +61,9 @@ public class RegistrationController implements Initializable {
 
     @FXML
     private TextField addressField;
+
+    @FXML
+    private TextField emailField;
 
     @FXML
     private Pane profilePicView;
@@ -109,7 +110,7 @@ public class RegistrationController implements Initializable {
         user.setUsername(usernameField.getText());
 
         if (passwordField.getText().equals(confirmPasswordField.getText())) {
-            user.setPassword(passwordField.getText());
+            user.setPassword(new BCryptPasswordEncoder().encode(passwordField.getText()));
         } else JOptionPane.showMessageDialog(null, "Password not matches!");
 
         user.setLastName(lastNameField.getText());
@@ -120,30 +121,31 @@ public class RegistrationController implements Initializable {
         byte age = (byte) Period.between(birthDateField.getValue(), LocalDate.now()).getYears();
         user.setAge(age);
         user.setAddress(addressField.getText());
-        //user.setProfilePic(is.readAllBytes());
+        user.setEmail(emailField.getText());
 
         if (Validator.isValidRegistrationForm(user)) {
             try {
                 Connection conn = Database.getConnection();
                 Statement stmt = conn.createStatement();
 
-                String insertQuery = "INSERT INTO users (username, password, last_name, first_name, middle_name, sex, birth_date, age, address) " +
+                String insertQuery = "INSERT INTO users (username, password, last_name, first_name, middle_name, sex, birth_date, age, address, email) " +
                         "VALUE ('" + user.getUsername() + "','" + user.getPassword() + "','" + user.getLastName() + "','" + user.getFirstName() + "','" + user.getMiddleName() + "','" + user.getSex() + "','" + user.getBirthDate() + "','"
-                        + user.getAge() + "','" + user.getAddress() + "');";
+                        + user.getAge() + "','" + user.getAddress() + "','" + user.getEmail() + "');";
 
                 stmt.execute(insertQuery);
 
-                PreparedStatement pstmt = conn.prepareStatement("UPDATE users SET profile_pic = ? WHERE username = '"+user.getUsername()+"';");
+                PreparedStatement pstmt = conn.prepareStatement("UPDATE users SET profile_pic = ? WHERE username = '" + user.getUsername() + "';");
                 pstmt.setBlob(1, is);
 
                 pstmt.executeUpdate();
 
-                System.out.println("Registration Success!");
+                JOptionPane.showMessageDialog(null, "Registration Success!");
+                backToLogin();
 
             } catch (Exception e) {
                 throw new Exception(e);
             }
-        }
+        } else JOptionPane.showMessageDialog(null, "Invalid Registration Form!");
     }
 
     public void backToLogin() throws IOException {

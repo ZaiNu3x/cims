@@ -1,18 +1,18 @@
 package group.intelliboys.cims;
 
+import group.intelliboys.cims.models.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.Objects;
-import java.util.Stack;
 
 public class App extends Application {
 
     public static Stage primaryStage;
+    public static User currentLoggedInUser;
 
     @Override
     public void start(Stage stage) throws IOException {

@@ -12,6 +12,7 @@ public class User {
     private LocalDate birthDate;
     private byte age;
     private String address;
+    private String email;
     private byte[] profilePic;
 
     public String getUsername() {
@@ -92,5 +93,13 @@ public class User {
 
     public void setProfilePic(byte[] profilePic) {
         this.profilePic = profilePic;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
