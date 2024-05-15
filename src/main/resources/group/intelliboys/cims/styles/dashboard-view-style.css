@@ -1,0 +1,4 @@
+
+.logout: hover {
+    -fx-text-fill: red;
+}

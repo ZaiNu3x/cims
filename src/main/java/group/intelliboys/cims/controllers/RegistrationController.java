@@ -18,10 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -80,7 +77,18 @@ public class RegistrationController implements Initializable {
     public boolean checkFormIfValid() {
 
         boolean isValid = false;
+        boolean containsNull = false;
         byte tmp = 0;
+
+        if (usernameField.getText() == null && passwordField.getText() == null &&
+                lastNameField.getText() == null && firstNameField.getText() == null && middleNameField.getText() == null &&
+                sexField.getValue() == null && birthDateField.getValue() == null && ageField.getText() == null &&
+                addressField.getText() == null && emailField.getText() == null) {
+
+            containsNull = true;
+        } else {
+            containsNull = false;
+        }
 
         for (boolean val : isFormValid) {
             if (!val) {
@@ -91,11 +99,10 @@ public class RegistrationController implements Initializable {
             }
         }
 
-        if(tmp == 0) {
-            return isValid;
-        }
-        else {
+        if (!(tmp == 0) && containsNull) {
             return !isValid;
+        } else {
+            return isValid;
         }
 
     }
@@ -104,6 +111,7 @@ public class RegistrationController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sexField.getItems().addAll("Male", "Female");
         registerBtn.setDisable(true);
+
 
         usernameField.textProperty().addListener(observable -> {
 
@@ -125,6 +133,8 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 usernameField.setTooltip(null);
@@ -150,6 +160,8 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 passwordField.setTooltip(null);
@@ -175,6 +187,8 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 confirmPasswordField.setTooltip(null);
@@ -203,6 +217,8 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 lastNameField.setTooltip(null);
@@ -230,6 +246,8 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 firstNameField.setTooltip(null);
@@ -257,6 +275,8 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 middleNameField.setTooltip(null);
@@ -280,6 +300,8 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 birthDateField.setTooltip(null);
@@ -303,6 +325,8 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 ageField.setTooltip(null);
@@ -326,6 +350,8 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 ageField.setTooltip(null);
@@ -349,6 +375,8 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 addressField.setTooltip(null);
@@ -365,12 +393,13 @@ public class RegistrationController implements Initializable {
 
                 if (checkFormIfValid()) {
                     registerBtn.setDisable(false);
+                } else {
+                    registerBtn.setDisable(true);
                 }
 
                 emailField.setTooltip(null);
                 emailField.setStyle("-fx-border-color: green");
             } else {
-
                 emailField.setTooltip(new Tooltip("""
                             Invalid Email address!
                         """));
@@ -394,23 +423,32 @@ public class RegistrationController implements Initializable {
 
     public void profileImgChooser() {
         FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter imageFilter
+                = new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.png");
+
+        fileChooser.getExtensionFilters().add(imageFilter);
 
         File file = fileChooser.showOpenDialog(App.primaryStage);
 
-        try {
+        if (file.length() < 3000000) {
+            try {
 
-            is = new FileInputStream(file);
+                is = new FileInputStream(file);
 
-            BufferedImage bufferedImage = ImageIO.read(file);
+                BufferedImage bufferedImage = ImageIO.read(file);
 
-            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 
-            profilePicView.setBackground(new Background(
-                    new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
-                            BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, true))));
+                profilePicView.setBackground(new Background(
+                        new BackgroundImage(image, BackgroundRepeat.NO_REPEAT,
+                                BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, new BackgroundSize(100, 100, true, true, true, true))));
 
-        } catch (Exception e) {
-            e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            registerBtn.setDisable(true);
+            profilePicView.setStyle("-fx-border-color: red");
         }
     }
 
@@ -434,6 +472,7 @@ public class RegistrationController implements Initializable {
         user.setEmail(emailField.getText());
 
         if (Validator.isValidRegistrationForm(user)) {
+
             try {
                 Connection conn = Database.getConnection();
                 Statement stmt = conn.createStatement();

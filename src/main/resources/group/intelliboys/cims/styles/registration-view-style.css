@@ -1,0 +1,6 @@
+
+.profile-pic {
+    -fx-background-image: url('../images/person.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+}
