@@ -32,7 +32,7 @@ public class LoginController {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
-        if(Validator.isUsernameValid(username)) {
+        if(!(username == null) || !(password == null)) {
             try {
                 Connection conn = Database.getConnection();
                 Statement stmt = conn.createStatement();
@@ -70,9 +70,9 @@ public class LoginController {
                         App.primaryStage.setScene(scene);
                         App.primaryStage.centerOnScreen();
                     }
-                    else System.out.println("Password not matches!");
+                    else JOptionPane.showMessageDialog(null, "Password not matches!");
                 }
-                else System.out.println("No Account was found!");
+                else JOptionPane.showMessageDialog(null, "No account was found!");
 
                 conn.close();
             }
@@ -80,7 +80,7 @@ public class LoginController {
                 throw new RuntimeException(e);
             }
         }
-        else System.out.println("Invalid Input!");
+        else JOptionPane.showMessageDialog(null, "Invalid Input!");
     }
 
     public void forgotPasswordClicked() throws IOException {

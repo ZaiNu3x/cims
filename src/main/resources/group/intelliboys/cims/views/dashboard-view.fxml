@@ -22,7 +22,7 @@
                </image>
             </ImageView>
             <TextField fx:id="searchField" layoutX="75.0" layoutY="29.0" prefHeight="49.0" prefWidth="245.0" promptText="Search" />
-            <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" layoutX="53.0" layoutY="103.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="260.0" text="Customers">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="25.0" layoutX="53.0" layoutY="103.0" mnemonicParsing="false" onAction="#showCustomersClicked" prefHeight="59.0" prefWidth="260.0" text="Customers">
                <graphic>
                   <ImageView fitHeight="37.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -75,13 +75,13 @@
             </Label>
          </children>
       </Pane>
-      <TableView layoutX="342.0" layoutY="82.0" prefHeight="672.0" prefWidth="1010.0">
+      <TableView fx:id="customersTable" layoutX="342.0" layoutY="82.0" prefHeight="672.0" prefWidth="1010.0">
         <columns>
-          <TableColumn prefWidth="182.0" text="LAST NAME" />
-          <TableColumn minWidth="5.0" prefWidth="175.0" text="FIRST NAME" />
-            <TableColumn prefWidth="193.0" text="MIDDLE NAME" />
-            <TableColumn prefWidth="244.0" text="ADDRESS" />
-            <TableColumn prefWidth="214.0" text="CONTACT NO" />
+          <TableColumn fx:id="customerLastName" prefWidth="182.0" text="LAST NAME" />
+          <TableColumn fx:id="customerFirstName" minWidth="5.0" prefWidth="175.0" text="FIRST NAME" />
+            <TableColumn fx:id="customerMiddleName" prefWidth="193.0" text="MIDDLE NAME" />
+            <TableColumn fx:id="customerAddress" prefWidth="244.0" text="ADDRESS" />
+            <TableColumn fx:id="customerContact" prefWidth="214.0" text="CONTACT NO" />
         </columns>
       </TableView>
    </children>
