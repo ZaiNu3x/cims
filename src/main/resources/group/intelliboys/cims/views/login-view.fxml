@@ -10,50 +10,50 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" stylesheets="@../styles/login-view-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.intelliboys.cims.controllers.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../styles/login-view-style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.intelliboys.cims.controllers.LoginController">
    <children>
-      <Pane prefHeight="600.0" prefWidth="496.0" styleClass="lef-pane">
+      <Pane prefHeight="768.0" prefWidth="697.0" styleClass="lef-pane">
          <children>
-            <Label layoutX="217.0" layoutY="132.0" text="LOGIN">
+            <Label layoutX="314.0" layoutY="147.0" text="LOGIN">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="85.0" layoutY="218.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="156.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/user.png" />
                </image>
             </ImageView>
-            <TextField fx:id="usernameField" layoutX="121.0" layoutY="210.0" prefHeight="45.0" prefWidth="290.0" promptText="Username" />
-            <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="85.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
+            <TextField fx:id="usernameField" layoutX="200.0" layoutY="229.0" prefHeight="54.0" prefWidth="342.0" promptText="Username" />
+            <ImageView fitHeight="30.0" fitWidth="32.0" layoutX="156.0" layoutY="319.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/password.png" />
                </image>
             </ImageView>
-            <PasswordField fx:id="passwordField" layoutX="121.0" layoutY="279.0" prefHeight="45.0" prefWidth="290.0" promptText="Password" />
-            <Label layoutX="293.0" layoutY="335.0" onMouseClicked="#forgotPasswordClicked" styleClass="f-password-lbl" text="Forgot Password?" underline="true">
+            <PasswordField fx:id="passwordField" layoutX="200.0" layoutY="307.0" prefHeight="54.0" prefWidth="342.0" promptText="Password" />
+            <Label layoutX="424.0" layoutY="376.0" onMouseClicked="#forgotPasswordClicked" styleClass="f-password-lbl" text="Forgot Password?" underline="true">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Button layoutX="203.0" layoutY="412.0" mnemonicParsing="false" onAction="#loginClicked" prefHeight="45.0" prefWidth="90.0" text="LOGIN" />
-            <Label layoutX="212.0" layoutY="523.0" onMouseClicked="#registerClicked" styleClass="register-lbl" text="REGISTER" underline="true">
+            <Button layoutX="300.0" layoutY="440.0" mnemonicParsing="false" onAction="#loginClicked" prefHeight="45.0" prefWidth="90.0" text="LOGIN" />
+            <Label layoutX="308.0" layoutY="569.0" onMouseClicked="#registerClicked" styleClass="register-lbl" text="REGISTER" underline="true">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="495.0" prefHeight="600.0" prefWidth="505.0" styleClass="right-pane">
+      <Pane layoutX="695.0" prefHeight="768.0" prefWidth="671.0" styleClass="right-pane">
          <children>
-            <Label layoutX="72.0" layoutY="197.0" text="CUSTOMER'S INFORMATION" textFill="WHITE">
+            <Label layoutX="108.0" layoutY="247.0" text="CUSTOMER'S INFORMATION" textFill="WHITE">
                <font>
-                  <Font name="Cambria" size="30.0" />
+                  <Font name="Cambria" size="40.0" />
                </font>
             </Label>
-            <Label layoutX="105.0" layoutY="255.0" text="MANAGEMENT SYSTEM" textFill="WHITE">
+            <Label layoutX="149.0" layoutY="335.0" text="MANAGEMENT SYSTEM" textFill="WHITE">
                <font>
-                  <Font name="Cambria" size="30.0" />
+                  <Font name="Cambria" size="40.0" />
                </font>
             </Label>
          </children>

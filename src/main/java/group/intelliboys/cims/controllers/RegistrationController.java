@@ -29,6 +29,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegistrationController implements Initializable {
 
@@ -73,6 +75,183 @@ public class RegistrationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sexField.getItems().addAll("Male", "Female");
+
+        usernameField.textProperty().addListener(observable -> {
+
+            String value = usernameField.getText();
+
+            if (value.length() < 8 || value.contains(" ") || Character.isDigit(value.charAt(0))) {
+                usernameField.setTooltip(new Tooltip("""
+                            Username length must 8 characters!
+                            Does not contain whitspaces!
+                            Does not start with number!
+                        """));
+
+                usernameField.setStyle("-fx-border-color: red");
+            } else {
+                usernameField.setTooltip(null);
+                usernameField.setStyle("-fx-border-color: green");
+            }
+        });
+
+        passwordField.textProperty().addListener(observable -> {
+
+            String value = passwordField.getText();
+
+            if (value.contains(" ") || value.length() < 8) {
+                passwordField.setTooltip(new Tooltip("""
+                            Password length must 8 characters!
+                            Does not contain whitspaces!
+                        """));
+
+                passwordField.setStyle("-fx-border-color: red");
+            } else {
+                passwordField.setTooltip(null);
+                passwordField.setStyle("-fx-border-color: green");
+            }
+        });
+
+        confirmPasswordField.textProperty().addListener(observable -> {
+
+            String password = passwordField.getText();
+            String confirmPass = confirmPasswordField.getText();
+
+            if (!confirmPass.equals(password)) {
+                confirmPasswordField.setTooltip(new Tooltip("""
+                            Password does not matches!
+                        """));
+
+                confirmPasswordField.setStyle("-fx-border-color: red");
+            } else {
+                confirmPasswordField.setTooltip(null);
+                confirmPasswordField.setStyle("-fx-border-color: green");
+            }
+
+        });
+
+        lastNameField.textProperty().addListener(observable -> {
+            String value = lastNameField.getText();
+
+            Pattern pattern = Pattern.compile("\\d");
+            Matcher matcher = pattern.matcher(value);
+
+            if (value.length() < 3 || value.length() > 30 || matcher.find()) {
+                lastNameField.setTooltip(new Tooltip("""
+                            Lastname must have 3 and less than 30 characters and does
+                            does contains number!
+                        """));
+
+                lastNameField.setStyle("-fx-border-color: red");
+            }
+            else {
+                lastNameField.setTooltip(null);
+                lastNameField.setStyle("-fx-border-color: green");
+            }
+        });
+
+        firstNameField.textProperty().addListener(observable -> {
+            String value = firstNameField.getText();
+
+            Pattern pattern = Pattern.compile("\\d");
+            Matcher matcher = pattern.matcher(value);
+
+            if (value.length() < 3 || value.length() > 30 || matcher.find()) {
+                firstNameField.setTooltip(new Tooltip("""
+                            Firstname must have 3 and less than 30 characters and does
+                            does contains number!
+                        """));
+
+                firstNameField.setStyle("-fx-border-color: red");
+            }
+            else {
+                firstNameField.setTooltip(null);
+                firstNameField.setStyle("-fx-border-color: green");
+            }
+        });
+
+        middleNameField.textProperty().addListener(observable -> {
+            String value = middleNameField.getText();
+
+            Pattern pattern = Pattern.compile("\\d");
+            Matcher matcher = pattern.matcher(value);
+
+            if (value.length() < 3 || value.length() > 30 || matcher.find()) {
+                middleNameField.setTooltip(new Tooltip("""
+                            Middlename must have 3 and less than 30 characters and does
+                            does contains number!
+                        """));
+
+                middleNameField.setStyle("-fx-border-color: red");
+            }
+            else {
+                middleNameField.setTooltip(null);
+                middleNameField.setStyle("-fx-border-color: green");
+            }
+        });
+
+        birthDateField.valueProperty().addListener(observable -> {
+            int years = Period.between(birthDateField.getValue(), LocalDate.now()).getYears();
+
+            if(years < 0 || years > 120) {
+                birthDateField.setTooltip(new Tooltip("""
+                            Invalid birth date!
+                        """));
+
+                birthDateField.setStyle("-fx-border-color: red");
+            }
+            else {
+                birthDateField.setTooltip(null);
+                birthDateField.setStyle("-fx-border-color: green");
+            }
+        });
+
+        ageField.textProperty().addListener(observable -> {
+            int age = Integer.parseInt(ageField.getText());
+
+            if (age < 0 || age > 120) {
+                ageField.setTooltip(new Tooltip("""
+                            Invalid Age!
+                        """));
+
+                ageField.setStyle("-fx-border-color: red");
+            }
+            else {
+                ageField.setTooltip(null);
+                ageField.setStyle("-fx-border-color: green");
+            }
+        });
+
+        addressField.textProperty().addListener(observable -> {
+            String value = addressField.getText();
+
+            if (value.length() < 8 || value.length() > 255) {
+                addressField.setTooltip(new Tooltip("""
+                            Invalid Address!
+                        """));
+
+                addressField.setStyle("-fx-border-color: red");
+            }
+            else {
+                addressField.setTooltip(null);
+                addressField.setStyle("-fx-border-color: green");
+            }
+        });
+
+        emailField.textProperty().addListener(observable -> {
+            String value = emailField.getText();
+
+            if(!value.endsWith("@yahoo.com") || !value.endsWith("@gmail.com")) {
+                emailField.setTooltip(new Tooltip("""
+                            Invalid Email address!
+                        """));
+
+                emailField.setStyle("-fx-border-color: red");
+            }
+            else {
+                emailField.setTooltip(null);
+                emailField.setStyle("-fx-border-color: green");
+            }
+        });
     }
 
     public void birthDateChangedListener() {
@@ -80,6 +259,10 @@ public class RegistrationController implements Initializable {
             byte age = (byte) Period.between(birthDateField.getValue(), LocalDate.now()).getYears();
             ageField.setText(String.valueOf(age));
         }
+    }
+
+    public void usernameFieldTextChanged() {
+
     }
 
     public void profileImgChooser() {
