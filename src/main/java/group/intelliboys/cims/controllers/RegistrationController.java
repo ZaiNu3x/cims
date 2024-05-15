@@ -70,11 +70,40 @@ public class RegistrationController implements Initializable {
     @FXML
     private Pane profilePicView;
 
+    @FXML
+    private Button registerBtn;
+
     private InputStream is;
+
+    private boolean[] isFormValid = new boolean[11];
+
+    public boolean checkFormIfValid() {
+
+        boolean isValid = false;
+        byte tmp = 0;
+
+        for (boolean val : isFormValid) {
+            if (!val) {
+                tmp += 1;
+                isValid = false;
+            } else {
+                isValid = true;
+            }
+        }
+
+        if(tmp == 0) {
+            return isValid;
+        }
+        else {
+            return !isValid;
+        }
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         sexField.getItems().addAll("Male", "Female");
+        registerBtn.setDisable(true);
 
         usernameField.textProperty().addListener(observable -> {
 
@@ -87,8 +116,17 @@ public class RegistrationController implements Initializable {
                             Does not start with number!
                         """));
 
+                registerBtn.setDisable(true);
                 usernameField.setStyle("-fx-border-color: red");
+
             } else {
+
+                isFormValid[0] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
                 usernameField.setTooltip(null);
                 usernameField.setStyle("-fx-border-color: green");
             }
@@ -104,8 +142,16 @@ public class RegistrationController implements Initializable {
                             Does not contain whitspaces!
                         """));
 
+                registerBtn.setDisable(true);
                 passwordField.setStyle("-fx-border-color: red");
             } else {
+
+                isFormValid[1] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
                 passwordField.setTooltip(null);
                 passwordField.setStyle("-fx-border-color: green");
             }
@@ -121,8 +167,16 @@ public class RegistrationController implements Initializable {
                             Password does not matches!
                         """));
 
+                registerBtn.setDisable(true);
                 confirmPasswordField.setStyle("-fx-border-color: red");
             } else {
+
+                isFormValid[2] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
                 confirmPasswordField.setTooltip(null);
                 confirmPasswordField.setStyle("-fx-border-color: green");
             }
@@ -141,9 +195,16 @@ public class RegistrationController implements Initializable {
                             does contains number!
                         """));
 
+                registerBtn.setDisable(true);
                 lastNameField.setStyle("-fx-border-color: red");
-            }
-            else {
+            } else {
+
+                isFormValid[3] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
                 lastNameField.setTooltip(null);
                 lastNameField.setStyle("-fx-border-color: green");
             }
@@ -161,9 +222,16 @@ public class RegistrationController implements Initializable {
                             does contains number!
                         """));
 
+                registerBtn.setDisable(true);
                 firstNameField.setStyle("-fx-border-color: red");
-            }
-            else {
+            } else {
+
+                isFormValid[4] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
                 firstNameField.setTooltip(null);
                 firstNameField.setStyle("-fx-border-color: green");
             }
@@ -181,9 +249,16 @@ public class RegistrationController implements Initializable {
                             does contains number!
                         """));
 
+                registerBtn.setDisable(true);
                 middleNameField.setStyle("-fx-border-color: red");
-            }
-            else {
+            } else {
+
+                isFormValid[5] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
                 middleNameField.setTooltip(null);
                 middleNameField.setStyle("-fx-border-color: green");
             }
@@ -192,14 +267,21 @@ public class RegistrationController implements Initializable {
         birthDateField.valueProperty().addListener(observable -> {
             int years = Period.between(birthDateField.getValue(), LocalDate.now()).getYears();
 
-            if(years < 0 || years > 120) {
+            if (years < 0 || years > 120) {
                 birthDateField.setTooltip(new Tooltip("""
                             Invalid birth date!
                         """));
 
+                registerBtn.setDisable(true);
                 birthDateField.setStyle("-fx-border-color: red");
-            }
-            else {
+            } else {
+
+                isFormValid[6] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
                 birthDateField.setTooltip(null);
                 birthDateField.setStyle("-fx-border-color: green");
             }
@@ -213,9 +295,39 @@ public class RegistrationController implements Initializable {
                             Invalid Age!
                         """));
 
+                registerBtn.setDisable(true);
                 ageField.setStyle("-fx-border-color: red");
+            } else {
+
+                isFormValid[7] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
+                ageField.setTooltip(null);
+                ageField.setStyle("-fx-border-color: green");
             }
-            else {
+        });
+
+        sexField.valueProperty().addListener(observable -> {
+            String value = sexField.getValue();
+
+            if (value == null) {
+                sexField.setTooltip(new Tooltip("""
+                            Invalid Gender!
+                        """));
+
+                registerBtn.setDisable(true);
+                sexField.setStyle("-fx-border-color: red");
+            } else {
+
+                isFormValid[8] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
                 ageField.setTooltip(null);
                 ageField.setStyle("-fx-border-color: green");
             }
@@ -229,9 +341,16 @@ public class RegistrationController implements Initializable {
                             Invalid Address!
                         """));
 
+                registerBtn.setDisable(true);
                 addressField.setStyle("-fx-border-color: red");
-            }
-            else {
+            } else {
+
+                isFormValid[9] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
                 addressField.setTooltip(null);
                 addressField.setStyle("-fx-border-color: green");
             }
@@ -240,16 +359,24 @@ public class RegistrationController implements Initializable {
         emailField.textProperty().addListener(observable -> {
             String value = emailField.getText();
 
-            if(!value.endsWith("@yahoo.com") || !value.endsWith("@gmail.com")) {
+            if (value.endsWith("@yahoo.com") || value.endsWith("@gmail.com")) {
+
+                isFormValid[10] = true;
+
+                if (checkFormIfValid()) {
+                    registerBtn.setDisable(false);
+                }
+
+                emailField.setTooltip(null);
+                emailField.setStyle("-fx-border-color: green");
+            } else {
+
                 emailField.setTooltip(new Tooltip("""
                             Invalid Email address!
                         """));
 
+                registerBtn.setDisable(true);
                 emailField.setStyle("-fx-border-color: red");
-            }
-            else {
-                emailField.setTooltip(null);
-                emailField.setStyle("-fx-border-color: green");
             }
         });
     }
