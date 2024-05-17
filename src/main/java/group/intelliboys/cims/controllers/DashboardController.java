@@ -5,12 +5,12 @@ import group.intelliboys.cims.models.Customer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
@@ -19,6 +19,7 @@ import javafx.scene.shape.Circle;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -51,6 +52,7 @@ public class DashboardController implements Initializable {
 
     @FXML
     private TableColumn<Customer, String> customerContact;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -87,5 +89,16 @@ public class DashboardController implements Initializable {
         customerContact.setCellValueFactory(new PropertyValueFactory<>("contactNo"));
 
         customersTable.setItems(customerList);
+    }
+
+    public void addCustomerClicked() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("views/customer-registration-form-view.fxml"));
+        DialogPane dialogPane = fxmlLoader.load();
+
+        Dialog<Void> dialog = new Dialog<>();
+        dialog.setTitle("ADD CUSTOMER");
+        dialog.setDialogPane(dialogPane);
+
+        dialog.showAndWait();
     }
 }

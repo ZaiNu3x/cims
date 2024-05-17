@@ -37,6 +37,9 @@ public class LoginController {
                 Connection conn = Database.getConnection();
                 Statement stmt = conn.createStatement();
                 String loginQuery = "SELECT password FROM users WHERE username = '"+username+"';";
+
+                System.out.println(loginQuery);
+
                 ResultSet rs = stmt.executeQuery(loginQuery);
 
                 if(rs.next()) {

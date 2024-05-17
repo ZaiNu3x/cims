@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+
+<DialogPane fx:id="dialogPane" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group.intelliboys.cims.controllers.CustomerRegistrationFormController">
+   <content>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="780.0">
+         <children>
+            <TextField fx:id="lastNameField" layoutX="63.0" layoutY="61.0" prefHeight="50.0" prefWidth="200.0" promptText="lastname" />
+            <TextField fx:id="firstNameField" layoutX="63.0" layoutY="130.0" prefHeight="50.0" prefWidth="200.0" promptText="firstname" />
+            <TextField fx:id="middleNameField" layoutX="63.0" layoutY="200.0" prefHeight="50.0" prefWidth="200.0" promptText="middlename" />
+            <ComboBox fx:id="sexField" layoutX="63.0" layoutY="269.0" prefHeight="50.0" prefWidth="200.0" promptText="gender" />
+            <DatePicker fx:id="birthDateField" layoutX="63.0" layoutY="343.0" prefHeight="50.0" prefWidth="200.0" promptText="birth date" />
+            <TextField fx:id="contactField" layoutX="308.0" layoutY="61.0" prefHeight="50.0" prefWidth="200.0" promptText="contact #" />
+            <TextField fx:id="addressField" layoutX="308.0" layoutY="130.0" prefHeight="50.0" prefWidth="200.0" promptText="address" />
+            <Pane layoutX="587.0" layoutY="39.0" prefHeight="145.0" prefWidth="145.0" style="-fx-border-width: 1; -fx-border-color: gray;" />
+            <Button layoutX="607.0" layoutY="200.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="105.0" text="SELECT IMAGE" />
+         </children>
+      </Pane>
+   </content>
+   <buttonTypes>
+      <ButtonType fx:constant="OK" />
+      <ButtonType fx:constant="CANCEL" />
+   </buttonTypes>
+</DialogPane>
